@@ -22,8 +22,11 @@ module.exports = {
         photoURL:"https://www.img.com/"+i, 
         address:"Street"+i, 
         governmentID:i, 
-        EmergencyContact:i+i, 
+        EmergencyContact:i+""+i, 
         paymentinfo:"3061"+i, 
+        wishlist:"",
+        tripHistory:"",
+        messages:"",
         // signUpdate:Date.now(),
       });
     }

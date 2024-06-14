@@ -29,7 +29,7 @@ const addUser = async (req, res, next) => {
     paymentinfo,
     wishlist,
     tripHistory,
-    messages
+    messages,
   });
 
   return res.status(200).json(data);
