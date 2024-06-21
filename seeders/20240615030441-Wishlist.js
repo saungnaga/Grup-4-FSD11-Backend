@@ -20,7 +20,7 @@ module.exports = {
       });
     }
 
-    await queryInterface.bulkInsert("Wishlists", data);
+    await queryInterface.bulkInsert("wishlists", data);
   },
 
   async down(queryInterface, Sequelize) {
@@ -31,6 +31,6 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
 
-    await queryInterface.bulkDelete("Wishlists", null, {});
+    await queryInterface.bulkDelete("wishlists", null, {});
   },
 };

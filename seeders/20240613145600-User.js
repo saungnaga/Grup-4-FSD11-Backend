@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
      */
     const data = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
       data.push({
         name: "User" + i,
         email: "email" + i + "@example.com",
