@@ -1,7 +1,22 @@
-const { Users } = require("../models");
+const { Users, Images, Wishlist, Products } = require("../models");
 
 const getUser = async (req, res, next) => {
-  const data = await Users.findAll();
+  const data = await Users.findAll({
+    include: [
+      {
+        model: Images,
+      },
+      {
+        model: Wishlist,
+        attributes: ["productId"],
+        include: [
+          {
+            model: Products,
+          },
+        ],
+      },
+    ],
+  });
   return res.status(200).json(data);
 };
 
