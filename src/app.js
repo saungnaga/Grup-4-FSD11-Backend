@@ -1,6 +1,16 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const sequelize = require('../config/database');
+
+// Sync database
+sequelize.sync()
+  .then(() => {
+    console.log('Database synced');
+  })
+  .catch(err => {
+    console.error('Unable to sync database:', err);
+  });
 
 // Middleware to parse JSON bodies
 app.use(express.json());

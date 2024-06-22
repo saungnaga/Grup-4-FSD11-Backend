@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Room = require('../models/room'); // Import the Room model
+const Property = require('../models/property'); 
+const RoomDetail = require('../models/roomDetail');
 
 // GET all rooms
 router.get('/', async (req, res) => {
   try {
-    const rooms = await Room.findAll();
+    const rooms = await RoomDetail.findAll({
+      include: Property
+    });
     res.json(rooms);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -16,7 +19,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const room = await Room.findByPk(id);
+    const room = await RoomDetail.findByPk(id, {
+      include: Property
+    });
     if (!room) {
       return res.status(404).json({ error: 'Room not found' });
     }
@@ -28,15 +33,22 @@ router.get('/:id', async (req, res) => {
 
 // POST create a new room
 router.post('/', async (req, res) => {
-  const { propertyId, totalBedroom, bedType, photoURL } = req.body;
+  const { property_id, bedType, roomNumber, photoURL } = req.body;
   try {
-    const newRoom = await Room.create({
-      propertyId,
-      totalBedroom,
+    // Check if the property exists
+    const property = await Property.findByPk(property_id);
+    if (!property) {
+      return res.status(404).json({ error: 'Property not found' });
+    }
+
+    // Create the room detail
+    const newRoomDetail = await RoomDetail.create({
+      property_id,
       bedType,
+      roomNumber,
       photoURL,
     });
-    res.status(201).json(newRoom);
+    res.status(201).json(newRoomDetail);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -45,16 +57,18 @@ router.post('/', async (req, res) => {
 // PUT update room by ID
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { propertyId, totalBedroom, bedType, photoURL } = req.body;
+  const { bedType, roomNumber, photoURL } = req.body;
   try {
-    let room = await Room.findByPk(id);
+    // Find the room detail by ID
+    let room = await RoomDetail.findByPk(id);
     if (!room) {
       return res.status(404).json({ error: 'Room not found' });
     }
+
+    // Update the room detail
     room = await room.update({
-      propertyId,
-      totalBedroom,
       bedType,
+      roomNumber,
       photoURL,
     });
     res.json(room);
@@ -67,10 +81,13 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const room = await Room.findByPk(id);
+    // Find the room detail by ID
+    const room = await RoomDetail.findByPk(id);
     if (!room) {
       return res.status(404).json({ error: 'Room not found' });
     }
+
+    // Delete the room detail
     await room.destroy();
     res.json({ message: 'Room deleted successfully' });
   } catch (error) {
