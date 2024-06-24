@@ -16,7 +16,7 @@ const getUserDetail = async (req, res, next) => {
 };
 
 const addUser = async (req, res, next) => {
-  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, wishlist, tripHistory, messages} = req.body;
+  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory} = req.body;
   const data = await Users.create({
     name,
     photoURL,
@@ -27,16 +27,14 @@ const addUser = async (req, res, next) => {
     phone,
     EmergencyContact,
     paymentinfo,
-    wishlist,
     tripHistory,
-    messages,
   });
 
   return res.status(200).json(data);
 };
 
 const updateUser = async (req, res, next) => {
-  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, wishlist, tripHistory, messages} = req.body;
+  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo,tripHistory} = req.body;
 
   const data = await Users.findOne({
     where: {
@@ -53,9 +51,7 @@ const updateUser = async (req, res, next) => {
   data.phone = phone;
   data.EmergencyContact = EmergencyContact;
   data.paymentinfo = paymentinfo;
-  data.wishlist = wishlist;
   data.tripHistory = tripHistory;
-  data.messages = messages;
 
   await data.save();
   return res.status(200).json(data);

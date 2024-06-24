@@ -59,7 +59,7 @@ module.exports = {
         notIncluded: "Not included " + i,
       });
     }
-    await queryInterface.bulkInsert("properties", data);
+    await queryInterface.bulkInsert("Properties", data);
   },
 
   async down (queryInterface, Sequelize) {
@@ -69,6 +69,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("properties", null, {});
+    await queryInterface.bulkDelete("Properties", null, {});
   }
 };

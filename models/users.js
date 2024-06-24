@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -9,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Users.hasMany(models.Wishlists);
     }
   }
   Users.init(
@@ -20,51 +23,43 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       photoURL: {
-        type: DataTypes.STRING(500),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       email: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       address:{
-        type : DataTypes.STRING(100),
+        type : DataTypes.STRING,
         allowNull:false,
       },
       password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       governmentID: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       phone: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       EmergencyContact: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       paymentinfo: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-      },
-      wishlist: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       tripHistory: {
-        type: DataTypes.STRING(20),
-        allowNull: false,
-      },
-      messages: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       createdAt: {

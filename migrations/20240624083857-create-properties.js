@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('properties', {
+    await queryInterface.createTable('Properties', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,35 +10,31 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING(200),
-        allowNull: false,
-      },
-      photos: {
-        type: Sequelize.STRING(200),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING(1000),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       price: {
-        type: Sequelize.INTEGER(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       cleaningFee: {
-        type: Sequelize.INTEGER(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       availabilityDate: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       ratingAverage: {
-        type: Sequelize.INTEGER(5),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       type: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       lon: {
@@ -50,39 +46,39 @@ module.exports = {
         allowNull: false,
       },
       address: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       country: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       locationDesc: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       houseRules: {
-        type: Sequelize.STRING(500),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       safetyProperty: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       cancellationPolicy: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       hostedDate: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       checkIn: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       checkOut: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       pets: {
@@ -110,15 +106,15 @@ module.exports = {
         allowNull: false,
       },
       guestNumber: {
-        type: Sequelize.INTEGER(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       bedroomsNumber: {
-        type: Sequelize.INTEGER(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       bathsNumber: {
-        type: Sequelize.INTEGER(100),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       isFavourite: {
@@ -170,11 +166,11 @@ module.exports = {
         allowNull: false,
       },
       services: {
-        type: Sequelize.STRING(500),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       notIncluded: {
-        type: Sequelize.STRING(500),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
@@ -190,6 +186,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('properties');
+    await queryInterface.dropTable('Properties');
   }
 };

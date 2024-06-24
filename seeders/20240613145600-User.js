@@ -24,9 +24,7 @@ module.exports = {
         governmentID:i, 
         EmergencyContact:i+""+i, 
         paymentinfo:"3061"+i, 
-        wishlist:"",
         tripHistory:"",
-        messages:"",
         // signUpdate:Date.now(),
       });
     }
