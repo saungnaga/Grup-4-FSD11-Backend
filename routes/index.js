@@ -1,7 +1,13 @@
 const { Router } = require("express");
 const router = Router();
 
-const routes = [require("./user.routes"),require("./wishlist.routes"),require("./property.routes")];
+const routes =
+  [
+    require("./user.routes"),
+    require("./wishlist.routes"),
+    require("./property.routes"),
+    require("./images.routes"),
+  ];
 for (const route of routes) {
   router.use("/api", route);
 }

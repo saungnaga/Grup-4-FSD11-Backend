@@ -16,7 +16,6 @@ module.exports = {
     for (let i = 0; i < 10; i++) {
       data.push({
         name: "User" + i,
-        photos: "https://www.img.com/photo" + i,
         description: "Description of listing " + i,
         price: i * 100,
         cleaningFee: i * 10,

@@ -1,7 +1,9 @@
 const { Images } = require("../models");
 
 const getImage = async (req, res, next) => {
-    const data = await Images.findAll();
+    const data = await Images.findAll({
+        include: "Properties",
+    });
     return res.status(200).json(data);
 };
 
@@ -16,7 +18,7 @@ const getImageDetail = async (req, res, next) => {
 };
 
 const addImage = async (req, res, next) => {
-    const { url,  PropertyID } = req.body;
+    const { url, PropertyID } = req.body;
     const data = await Images.create({
         url,
         PropertyID,
@@ -26,7 +28,7 @@ const addImage = async (req, res, next) => {
 };
 
 const updateImage = async (req, res, next) => {
-    const {   url, PropertyID } = req.body;
+    const { url, PropertyID } = req.body;
 
     const data = await Images.findOne({
         where: {
@@ -35,7 +37,7 @@ const updateImage = async (req, res, next) => {
     });
 
     data.url = url;
-    data. PropertyID =  PropertyID;
+    data.PropertyID = PropertyID;
 
     await data.save();
     return res.status(200).json(data);

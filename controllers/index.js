@@ -1,5 +1,6 @@
 module.exports = {
   UserControllers: require("./user.controller"),
   WishlistControllers: require("./wishlist.controller"),
-  PropertyControllers: require("./property.controller")
+  PropertyControllers: require("./property.controller"),
+  ImageControllers: require("./image.controller"),
 };
