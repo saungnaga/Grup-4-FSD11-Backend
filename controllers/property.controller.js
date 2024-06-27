@@ -27,9 +27,10 @@ const getPropertyDetail = async (req, res, next) => {
 };
 
 const addProperty = async (req, res, next) => {
-    const { name, description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
+    const { name, userID,description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
     const data = await Properties.create({
         name,
+        userID,
         description,
         price,
         cleaningFee,
@@ -76,7 +77,7 @@ const addProperty = async (req, res, next) => {
 };
 
 const updateProperty = async (req, res, next) => {
-    const { name, photos, description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
+    const { name, userID, description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
 
     const data = await Properties.findOne({
         where: {
@@ -85,7 +86,7 @@ const updateProperty = async (req, res, next) => {
     });
 
     data.name = name;
-    data.photos = photos;
+    data.userID = userID;
     data.description = description;
     data.price = price;
     data.cleaningFee = cleaningFee;
