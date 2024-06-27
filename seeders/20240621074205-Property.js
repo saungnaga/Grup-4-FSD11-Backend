@@ -13,10 +13,11 @@ module.exports = {
      * }], {});
     */
     const data = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
       data.push({
         name: "User" + i,
         description: "Description of listing " + i,
+        userID:(Math.random() * 4 + 1).toFixed(2),
         price: i * 100,
         cleaningFee: i * 10,
         availabilityDate: Date.now(),

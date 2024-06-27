@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Properties.hasMany(models.Wishlists);
       Properties.hasMany(models.Images);
+      Properties.belongsTo(models.Users);
     }
   }
   Properties.init(
@@ -23,11 +24,11 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      name: {
-        type: DataTypes.STRING,
+      userID: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      photos: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },

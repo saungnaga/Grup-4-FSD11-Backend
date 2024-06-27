@@ -1,16 +1,17 @@
-const { properties } = require("../models");
+const { Properties, Images } = require("../models");
 
 const getProperty = async (req, res, next) => {
-    const data = await properties.findAll({
-        // include: "Images",
-        // include: "Wishlists",
-    }
-    );
+    const data = await Properties.findAll({
+        include: 
+          {
+            model:Images,
+          },
+      });
     return res.status(200).json(data);
 };
 
 const getPropertyDetail = async (req, res, next) => {
-    const data = await properties.findOne({
+    const data = await Properties.findOne({
         where: {
             id: req.params.id,
         },
@@ -21,7 +22,7 @@ const getPropertyDetail = async (req, res, next) => {
 
 const addProperty = async (req, res, next) => {
     const { name, description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
-    const data = await properties.create({
+    const data = await Properties.create({
         name,
         description,
         price,
@@ -69,15 +70,16 @@ const addProperty = async (req, res, next) => {
 };
 
 const updateProperty = async (req, res, next) => {
-    const { name, description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
+    const { name, photos, description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
 
-    const data = await properties.findOne({
+    const data = await Properties.findOne({
         where: {
             id: req.params.id,
         },
     });
 
     data.name = name;
+    data.photos = photos;
     data.description = description;
     data.price = price;
     data.cleaningFee = cleaningFee;
@@ -124,7 +126,7 @@ const updateProperty = async (req, res, next) => {
 };
 
 const deleteProperty = async (req, res, next) => {
-    const data = await properties.findOne({
+    const data = await Properties.findOne({
         where: {
             id: req.params.id,
         },

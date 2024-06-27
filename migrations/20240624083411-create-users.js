@@ -48,6 +48,14 @@ module.exports = {
       tripHistory: {
         type: Sequelize.STRING,
         allowNull: false,
+      },      
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      languanges: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

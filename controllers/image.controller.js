@@ -2,7 +2,6 @@ const { Images } = require("../models");
 
 const getImage = async (req, res, next) => {
     const data = await Images.findAll({
-        include: "Properties",
     });
     return res.status(200).json(data);
 };

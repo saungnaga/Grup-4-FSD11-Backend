@@ -1,22 +1,44 @@
-const { Users } = require("../models");
+const { Users, Wishlists, Properties } = require("../models");
 
 const getUser = async (req, res, next) => {
-  const data = await Users.findAll();
+  const data = await Users.findAll(
+    {
+      include: 
+      [
+        {
+          model: Wishlists,
+        },
+        {
+          model: Properties,
+        },
+      ],
+    }
+  );
   return res.status(200).json(data);
 };
 
 const getUserDetail = async (req, res, next) => {
   const data = await Users.findOne({
-    where: {
+    where: 
+    {
       id: req.params.id,
     },
+    include: 
+    [
+      {
+        model: Wishlists,
+      },
+      {
+        model: Properties,
+      },
+    ],
   });
 
   return res.status(200).json(data);
 };
 
 const addUser = async (req, res, next) => {
-  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory} = req.body;
+  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory } = req.body;
   const data = await Users.create({
     name,
     photoURL,
@@ -34,7 +56,7 @@ const addUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo,tripHistory} = req.body;
+  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory } = req.body;
 
   const data = await Users.findOne({
     where: {

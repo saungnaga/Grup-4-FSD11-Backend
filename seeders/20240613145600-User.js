@@ -12,19 +12,39 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
+    const countries = [
+      "United States",
+      "Canada",
+      "Mexico",
+      "Brazil",
+      "United Kingdom",
+      "France",
+      "Germany",
+      "Italy",
+      "Spain",
+      "Russia",
+      "China",
+      "Japan",
+      "India",
+      "Australia",
+      "South Africa"
+    ];
     const data = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * countries.length);
       data.push({
         name: "User" + i,
         email: "email" + i + "@example.com",
         password: "password" + i,
         phone: i,
-        photoURL:"https://www.img.com/"+i, 
-        address:"Street"+i, 
-        governmentID:i, 
-        EmergencyContact:i+""+i, 
-        paymentinfo:"3061"+i, 
-        tripHistory:"",
+        photoURL: "https://www.img.com/" + i,
+        address: "Street" + i,
+        governmentID: i,
+        EmergencyContact: i + "" + i,
+        paymentinfo: "3061" + i,
+        tripHistory: "",
+        description: "Description " + i,
+        languanges: countries[randomIndex],
         // signUpdate:Date.now(),
       });
     }

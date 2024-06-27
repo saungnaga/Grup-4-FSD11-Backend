@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Users.hasMany(models.Wishlists);
+      Users.hasMany(models.Properties);
     }
   }
   Users.init(
@@ -59,6 +60,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       tripHistory: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      languanges: {
         type: DataTypes.STRING,
         allowNull: false,
       },
