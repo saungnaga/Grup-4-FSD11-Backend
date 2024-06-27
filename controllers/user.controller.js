@@ -38,7 +38,7 @@ const getUserDetail = async (req, res, next) => {
 };
 
 const addUser = async (req, res, next) => {
-  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory } = req.body;
+  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory, description,languanges, } = req.body;
   const data = await Users.create({
     name,
     photoURL,
@@ -50,6 +50,8 @@ const addUser = async (req, res, next) => {
     EmergencyContact,
     paymentinfo,
     tripHistory,
+    description,
+    languanges,
   });
 
   return res.status(200).json(data);

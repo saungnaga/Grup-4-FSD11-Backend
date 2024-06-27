@@ -5,6 +5,7 @@ const getProperty = async (req, res, next) => {
         include: 
           {
             model:Images,
+            attributes: ["id","url"],
           },
       });
     return res.status(200).json(data);
@@ -15,6 +16,11 @@ const getPropertyDetail = async (req, res, next) => {
         where: {
             id: req.params.id,
         },
+        include: 
+          {
+            model:Images,
+            attributes: ["id","url"],
+          },
     });
 
     return res.status(200).json(data);
