@@ -58,7 +58,7 @@ const addUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory } = req.body;
+  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory,description,languanges } = req.body;
 
   const data = await Users.findOne({
     where: {
@@ -76,7 +76,8 @@ const updateUser = async (req, res, next) => {
   data.EmergencyContact = EmergencyContact;
   data.paymentinfo = paymentinfo;
   data.tripHistory = tripHistory;
-
+  data.description =description;
+  data.languanges = languanges;
   await data.save();
   return res.status(200).json(data);
 };
