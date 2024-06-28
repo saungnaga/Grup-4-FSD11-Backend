@@ -1,4 +1,12 @@
 
+// const roleMiddleware = async (req, res, next) => {
+//   // bakal ngecek ketika menambahkan user, role yangg dikirim tidak boleh selain 'user'
+//   req.body.name = "Lil " + req.body.name;
+//   next();
+// };
+
+// module.exports = { roleMiddleware };
+
 // genderCheckMiddleware.js
 // const genderCheckMiddleware = (req, res, next) => {
 //     if (req.body && req.body.gender && req.body.name) {

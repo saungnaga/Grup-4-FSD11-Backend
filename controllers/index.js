@@ -1,4 +1,5 @@
 module.exports = {
+  UserControllers: require("./bookings"),
   RoomControllers: require("./room.controller")
   UserControllers: require("./user.controller"),
   WishlistControllers: require("./wishlist.controller"),
