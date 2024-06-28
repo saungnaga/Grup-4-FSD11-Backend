@@ -1,0 +1,22 @@
+const { Router } = require("express");
+const router = Router();
+
+const routes =
+  [
+    require("./user.routes"),
+    require("./wishlist.routes"),
+    require("./property.routes"),
+    require("./images.routes"),
+  ];
+for (const route of routes) {
+  router.use("/api", route);
+}
+
+
+router.all("*", (req, res, next) => {
+  return res.status(404).json({
+    messsage: "Halaman tidak ditemeukan",
+  });
+});
+
+module.exports = router;
