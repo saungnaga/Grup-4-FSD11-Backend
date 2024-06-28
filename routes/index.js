@@ -7,6 +7,7 @@ const routes =
     require("./wishlist.routes"),
     require("./property.routes"),
     require("./images.routes"),
+    require("./room.routes"),
   ];
 for (const route of routes) {
   router.use("/api", route);
