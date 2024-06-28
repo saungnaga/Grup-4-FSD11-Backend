@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const { sequelize } = require('./models');
-const reviewRoutes = require('./routes/reviewRoutes'); // Impor rute
+const Routes = require('./routes'); // Impor rute
 
 const app = express();
 app.use(express.json());
 
-app.use('/reviews', reviewRoutes); // Gunakan rute review
+app.use('/reviews', Routes); // Gunakan rute review
 
 const PORT = process.env.PORT || 3000;
 

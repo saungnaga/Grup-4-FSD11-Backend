@@ -1,10 +1,11 @@
 const { Review, Property } = require('../models');
 
-// Fungsi untuk mengambil rata-rata rating berdasarkan propertyId
-const getAverageRating = async (req, res) => {
+// Fungsi untuk mengambil rata-rata rating dan semua review berdasarkan propertyId
+const getAverageRatingAndReviews = async (req, res) => {
   try {
     const { propertyId } = req.params;
     const reviews = await Review.findAll({ where: { propertyId } });
+
     if (!reviews.length) {
       return res.status(404).json({ error: 'No reviews found for this property.' });
     }
@@ -32,7 +33,16 @@ const getAverageRating = async (req, res) => {
       averageRating[key] = (totalRatings[key] / reviewCount).toFixed(2);
     }
 
-    res.json({ propertyId, averageRating });
+    // Format respons sesuai yang diinginkan
+    const response = {
+      propertyId,
+      averageRating,
+      reviews: reviews.map(review => ({
+        reviewText: review.reviewText
+      }))
+    };
+
+    res.json(response);
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while fetching reviews.' });
   }
@@ -42,7 +52,7 @@ const getAverageRating = async (req, res) => {
 const addReview = async (req, res) => {
   try {
     const { propertyId, userId, reviewText, cleanlinessRate, accuracyRate, checkInRate, communicationRate, locationRate, valueRate } = req.body;
-    
+
     // Validasi input
     if (!propertyId || !userId || !cleanlinessRate || !accuracyRate || !checkInRate || !communicationRate || !locationRate || !valueRate) {
       return res.status(400).json({ error: 'All fields are required.' });
@@ -68,6 +78,6 @@ const addReview = async (req, res) => {
 };
 
 module.exports = {
-  getAverageRating,
+  getAverageRatingAndReviews,
   addReview
 };
