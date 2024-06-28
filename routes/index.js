@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const routes = [];
+const routes =
   [
     require("./user.routes"),
     require("./wishlist.routes"),
