@@ -5,4 +5,5 @@ module.exports = {
   WishlistControllers: require("./wishlist.controller"),
   PropertyControllers: require("./property.controller"),
   ImageControllers: require("./image.controller"),
+  reviewController: require("./reviewController"),
 };
