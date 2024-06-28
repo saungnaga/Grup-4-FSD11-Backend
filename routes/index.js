@@ -17,7 +17,7 @@ for (const route of routes) {
 
 router.all("*", (req, res, next) => {
   return res.status(404).json({
-    messsage: "Halaman tidak ditemeukan",
+    messsage: "Halaman tidak ditemukan",
   });
 });
 
