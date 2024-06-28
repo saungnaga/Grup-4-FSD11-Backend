@@ -1,15 +1,23 @@
 const { Router } = require("express");
 const router = Router();
 
-const routes = [require("./room.routes")]
+const routes =
+  [
+    require("./user.routes"),
+    require("./wishlist.routes"),
+    require("./property.routes"),
+    require("./images.routes"),
+    require("./room.routes"),
+  ];
 for (const route of routes) {
-    router.use("/api", routes);   
+  router.use("/api", route);
 }
 
+
 router.all("*", (req, res, next) => {
-    return res.status(404).json ({
-        message: "error"
-    })
-})
+  return res.status(404).json({
+    messsage: "Halaman tidak ditemeukan",
+  });
+});
 
 module.exports = router;

@@ -1,3 +1,7 @@
 module.exports = {
-    RoomControllers: require("./room.controller")
+  RoomControllers: require("./room.controller")
+  UserControllers: require("./user.controller"),
+  WishlistControllers: require("./wishlist.controller"),
+  PropertyControllers: require("./property.controller"),
+  ImageControllers: require("./image.controller"),
 };
