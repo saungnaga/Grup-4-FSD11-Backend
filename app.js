@@ -3,7 +3,7 @@ const config = require("./config/config");
 const routes = require("./routes");
 
 const app = express();
-const PORT = config.appPort || 3001;
+const PORT = config.appPort;
 
 app.use(express.json());
 app.use(
