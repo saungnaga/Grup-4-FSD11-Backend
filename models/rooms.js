@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    roomNumber: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     bedType: {
       type: DataTypes.STRING,
       allowNull: false,

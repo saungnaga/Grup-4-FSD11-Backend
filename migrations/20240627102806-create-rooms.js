@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       PropertyID: {
         type: Sequelize.INTEGER,
@@ -18,6 +18,10 @@ module.exports = {
         },
         onDelete:"CASCADE",
         onUpdate:"CASCADE"
+      },
+      roomNumber: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       bedType: {
         type: Sequelize.STRING,

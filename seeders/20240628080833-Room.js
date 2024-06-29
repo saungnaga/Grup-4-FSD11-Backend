@@ -17,7 +17,8 @@ module.exports = {
     for (let i = 0; i < 5; i++) {
       data.push({
         PropertyID:(Math.random() * 4 + 1).toFixed(2),
-        bedType: ['Queen', 'King', 'Single', 'Double'][Math.floor(Math.random() * 4)],
+        roomNumber:(Math.floor(Math.random) * 4) + 1,
+        bedType: ['Queen', 'King', 'Single', 'Double', 'Bunker'][Math.floor(Math.random() * 5)],
         photoURL: `test${i}.url`,
       })
     }
