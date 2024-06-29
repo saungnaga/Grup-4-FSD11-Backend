@@ -9,11 +9,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      roomNumber: {
+      PropertyID: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references:{
+          model:"Properties",
+          key:"id",
+        },
       },
-      bedTypeDesc: {
+      bedType: {
         type: Sequelize.STRING,
         allowNull: false,
       },

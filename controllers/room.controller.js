@@ -11,23 +11,23 @@ const getRoomDetail = async (req, res, next) => {
 };
 
 const addRoom = async (req, res, next) => {
-    const { roomNumber, bedTypeDesc, photoURL } = req.body;
+    const { PropertyID, bedType, photoURL } = req.body;
 
     const data = await Rooms.create({
-        roomNumber,
-        bedTypeDesc,
+        PropertyID,
+        bedType,
         photoURL,
     });
     return res.status(200).json(data);
 };
 
 const updateRoom = async (req, res, next) => {
-    const { roomNumber, bedTypeDesc, photoURL } = req.body;
+    const { PropertyID, bedType, photoURL } = req.body;
     
     const data = await Rooms.findByPk(req.params.id);
 
-    data.roomNumber = roomNumber;
-    data.bedTypeDesc = bedTypeDesc;
+    data.PropertyID = PropertyID;
+    data.bedType = bedType;
     data.photoURL = photoURL;
 
     await data.save();
