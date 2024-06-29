@@ -1,13 +1,15 @@
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bookingController = require('../controllers/bookings');
+const BookingControllers = require('../controllers');
 
-// Endpoint untuk mendapatkan semua bookings
-router.get('/bookings', bookingController.getAllBookings);
 
-// Endpoint untuk membuat booking baru
-router.post('/bookings', bookingController.createBooking);
+router.get("/boking", BookingControllers.getBoking);
+router.post("/boking", BookingControllers.createBoking);
+router.patch("/boking", BookingControllers.updateBoking);
+router.delete("/boking", BookingControllers.deleteBoking);
 
 module.exports = router;
+
+
+
 

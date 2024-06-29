@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Properties.hasMany(models.Wishlists);
       Properties.hasMany(models.Images);
       Properties.belongsTo(models.Users);
+      Properties.hasMany(models.Rooms);
     }
   }
   Properties.init(

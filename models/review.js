@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     valueRate: DataTypes.INTEGER
   });
   Review.associate = (models) => {
-    Review.belongsTo(models.Property, { foreignKey: 'propertyId' });
+    // Review.belongsTo(models.Property, { foreignKey: 'propertyId' });
   };
   return Review;
 };

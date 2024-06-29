@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Rooms.belongsTo(models.Properties);
     }
   }
   Rooms.init({
@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    roomNumber: {
+    PropertyID: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    bedTypeDesc: {
+    bedType: {
       type: DataTypes.STRING,
       allowNull: false,
     },

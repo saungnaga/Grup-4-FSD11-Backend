@@ -16,8 +16,8 @@ module.exports = {
     const data = [];
     for (let i = 0; i < 5; i++) {
       data.push({
-        roomNumber: Math.floor(Math.random() * 5) + 1,
-        bedTypeDesc: ['Queen', 'King', 'King & Queen', 'King, Queen & Single', 'Queen & Single', 'King & Single'][Math.floor(Math.random() * 6)],
+        PropertyID:(Math.random() * 4 + 1).toFixed(2),
+        bedType: ['Queen', 'King', 'Single', 'Double'][Math.floor(Math.random() * 4)],
         photoURL: `test${i}.url`,
       })
     }

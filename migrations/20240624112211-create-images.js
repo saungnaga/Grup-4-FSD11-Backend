@@ -20,6 +20,8 @@ module.exports = {
           model:"Properties",
           key:"id",
         },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       },
       createdAt: {
         allowNull: false,

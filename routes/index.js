@@ -8,7 +8,7 @@ const routes =
     require("./property.routes"),
     require("./images.routes"),
     require("./room.routes"),
-    require("./booking.routes"),
+    // require("./booking.routes"),
   ];
 for (const route of routes) {
   router.use("/api", route);
@@ -17,7 +17,7 @@ for (const route of routes) {
 
 router.all("*", (req, res, next) => {
   return res.status(404).json({
-    messsage: "Halaman tidak ditemeukan",
+    messsage: "Halaman tidak ditemukan",
   });
 });
 
