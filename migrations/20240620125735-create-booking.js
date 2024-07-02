@@ -13,10 +13,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       },
       property_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Properties",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       },
       date_start: {
         type: Sequelize.DATE

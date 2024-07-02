@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     static associate(models) {
       // define association here
+      Booking.belongsTo(models.Users);
+      Booking.belongsTo(models.Properties);
     }
   }
   
