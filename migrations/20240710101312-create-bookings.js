@@ -2,12 +2,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Wishlists', {
+    await queryInterface.createTable('Bookings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       userID: {
         type: Sequelize.INTEGER,
@@ -19,7 +19,7 @@ module.exports = {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
       },
-      PropertyID: {
+      propertyID: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -29,24 +29,31 @@ module.exports = {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
       },
-      isWishlist:{
-        type: Sequelize.BOOLEAN,
-        allowNull:false,
-        defaultValue: true,
+      date_start: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      date_end: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      guest_number: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Wishlists');
+    await queryInterface.dropTable('Bookings');
   }
 };

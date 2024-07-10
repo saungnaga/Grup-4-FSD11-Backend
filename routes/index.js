@@ -8,8 +8,8 @@ const routes =
     require("./property.routes"),
     require("./images.routes"),
     require("./room.routes"),
-    require("./auth.routes")
-    // require("./booking.routes"),
+    require("./auth.routes"),
+    require("./booking.routes"),
   ];
 for (const route of routes) {
   router.use("/api", route);

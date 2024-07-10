@@ -5,6 +5,6 @@ module.exports = {
   PropertyControllers: require("./property.controller"),
   ImageControllers: require("./image.controller"),
   reviewController: require("./reviewController"),
-  // BookingControllers: require("./bookings"),
+  BookingControllers: require("./bookings.controller"),
   AuthController: require("./auth.controller"),
 };

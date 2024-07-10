@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    isWishlist:{
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue: true,
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,

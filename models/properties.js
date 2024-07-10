@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Properties.hasMany(models.Images);
       Properties.belongsTo(models.Users);
       Properties.hasMany(models.Rooms);
+      Properties.hasMany(models.Bookings);
     }
   }
   Properties.init(
@@ -29,7 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      name: {
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      country: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -43,15 +48,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       cleaningFee: {
         type: DataTypes.INTEGER,
-        allowNull: false,
       },
-      availabilityDate: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      availabilityDateFrom: {
+        type: DataTypes.STRING,
       },
-      ratingAverage: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      availabilityDateTo: {
+        type: DataTypes.STRING,
       },
       type: {
         type: DataTypes.STRING,
@@ -63,14 +65,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       lat: {
         type: DataTypes.FLOAT,
-        allowNull: false,
-      },
-      address: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      country: {
-        type: DataTypes.STRING,
         allowNull: false,
       },
       locationDesc: {
@@ -90,28 +84,18 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       hostedDate: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      checkIn: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      checkOut: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       pets: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        
       },
       parties: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-      },
-      comercialPhoto: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+        
       },
       smoking: {
         type: DataTypes.BOOLEAN,
@@ -119,11 +103,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       coAlarm: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       smokeAlarm: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       guestNumber: {
         type: DataTypes.INTEGER,
@@ -131,59 +115,55 @@ module.exports = (sequelize, DataTypes) => {
       },
       bedroomsNumber: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false,        
       },
       bathsNumber: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      isFavourite: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
       scenicViews: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       bathroom: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       laundry: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       family: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       heatingCooling: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       internet: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       office: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       kitchen: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       diningRoom: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       outdoor: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       parking: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false,        
       },
       services: {
         type: DataTypes.STRING,
@@ -192,6 +172,15 @@ module.exports = (sequelize, DataTypes) => {
       notIncluded: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      star: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      favorite: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,        
       },
       createdAt: {
         allowNull: false,

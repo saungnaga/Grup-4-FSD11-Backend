@@ -45,7 +45,6 @@ module.exports = {
         tripHistory: "",
         description: "Description " + i,
         languanges: countries[randomIndex],
-        // signUpdate:Date.now(),
       });
     }
 

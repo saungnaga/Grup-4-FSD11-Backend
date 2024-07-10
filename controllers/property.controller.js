@@ -2,13 +2,18 @@ const { Properties, Images } = require("../models");
 
 const getProperty = async (req, res, next) => {
     const data = await Properties.findAll({
-        include: 
-          {
-            model:Images,
-            attributes: ["id","url"],
-          },
-      });
-    return res.status(200).json(data);
+        include: {
+            model: Images,
+            attributes: ["url"],
+        },
+    });
+
+    const transformedData = data.map(property => ({
+        ...property.dataValues,
+        Images: property.Images.map(image => image.url),
+    }));
+
+    return res.status(200).json(transformedData);
 };
 
 const getPropertyDetail = async (req, res, next) => {
@@ -16,104 +21,64 @@ const getPropertyDetail = async (req, res, next) => {
         where: {
             id: req.params.id,
         },
-        include: 
-          {
-            model:Images,
-            attributes: ["id","url"],
-          },
+        include: {
+            model: Images,
+            attributes: ["url"],
+        },
     });
 
-    return res.status(200).json(data);
+    if (data) {
+        const transformedData = {
+            ...data.dataValues,
+            Images: data.Images.map(image => image.url),
+        };
+        return res.status(200).json(transformedData);
+    } else {
+        return res.status(404).json({ message: "Property not found" });
+    }
 };
 
 const addProperty = async (req, res, next) => {
-    const { name, userID,description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
+    const {userID, address, country, description, price, cleaningFee, availabilityDateFrom, availabilityDateTo, type, lon, lat, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, pets, parties, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded, star, favorite } = req.body;
     const data = await Properties.create({
-        name,
-        userID,
-        description,
-        price,
-        cleaningFee,
-        availabilityDate,
-        ratingAverage,
-        type,
-        lon,
-        lat,
-        address,
-        country,
-        locationDesc,
-        houseRules,
-        safetyProperty,
-        cancellationPolicy,
-        hostedDate,
-        checkIn,
-        checkOut,
-        pets,
-        parties,
-        comercialPhoto,
-        smoking,
-        coAlarm,
-        smokeAlarm,
-        guestNumber,
-        bedroomsNumber,
-        bathsNumber,
-        isFavourite,
-        scenicViews,
-        bathroom,
-        laundry,
-        family,
-        heatingCooling,
-        internet,
-        office,
-        kitchen,
-        diningRoom,
-        outdoor,
-        parking,
-        services,
-        notIncluded,
+        userID, address, country, description, price, cleaningFee, availabilityDateFrom, availabilityDateTo, type, lon, lat, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, pets, parties, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded, star, favorite
     });
 
     return res.status(200).json(data);
 };
 
 const updateProperty = async (req, res, next) => {
-    const { name, userID, description, price, cleaningFee, availabilityDate, ratingAverage, type, lon, lat, address, country, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, checkIn, checkOut, pets, parties, comercialPhoto, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, isFavourite, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded } = req.body;
+    const { userID, address, country, description, price, cleaningFee, availabilityDateFrom, availabilityDateTo, type, lon, lat, locationDesc, houseRules, safetyProperty, cancellationPolicy, hostedDate, pets, parties, smoking, coAlarm, smokeAlarm, guestNumber, bedroomsNumber, bathsNumber, scenicViews, bathroom, laundry, family, heatingCooling, internet, office, kitchen, diningRoom, outdoor, parking, services, notIncluded, star, favorite} = req.body;
 
     const data = await Properties.findOne({
         where: {
             id: req.params.id,
         },
     });
-
-    data.name = name;
     data.userID = userID;
+    data.address = address;
+    data.country = country;
     data.description = description;
     data.price = price;
     data.cleaningFee = cleaningFee;
-    data.availabilityDate = availabilityDate;
-    data.ratingAverage = ratingAverage;
+    data.availabilityDateFrom = availabilityDateFrom;
+    data.availabilityDateTo = availabilityDateTo;
     data.type = type;
     data.lon = lon;
     data.lat = lat;
-    data.address = address;
-    data.country = country;
     data.locationDesc = locationDesc;
     data.houseRules = houseRules;
     data.safetyProperty = safetyProperty;
     data.cancellationPolicy = cancellationPolicy;
     data.hostedDate = hostedDate;
-    data.checkIn = checkIn;
-    data.checkOut = checkOut;
     data.pets = pets;
     data.parties = parties;
-    data.comercialPhoto = comercialPhoto;
     data.smoking = smoking;
     data.coAlarm = coAlarm;
     data.smokeAlarm = smokeAlarm;
     data.guestNumber = guestNumber;
     data.bedroomsNumber = bedroomsNumber;
     data.bathsNumber = bathsNumber;
-    data.isFavourite = isFavourite;
     data.scenicViews = scenicViews;
     data.bathroom = bathroom;
     data.laundry = laundry;
@@ -127,7 +92,8 @@ const updateProperty = async (req, res, next) => {
     data.parking = parking;
     data.services = services;
     data.notIncluded = notIncluded;
-
+    data.star = star;
+    data.favorite = favorite;
     await data.save();
     return res.status(200).json(data);
 };

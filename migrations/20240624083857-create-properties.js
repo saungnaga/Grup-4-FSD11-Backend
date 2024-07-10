@@ -19,7 +19,11 @@ module.exports = {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"
       },
-      name: {
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      country: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -33,15 +37,12 @@ module.exports = {
       },
       cleaningFee: {
         type: Sequelize.INTEGER,
-        allowNull: false,
       },
-      availabilityDate: {
+      availabilityDateFrom: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
-      ratingAverage: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+      availabilityDateTo: {
+        type: Sequelize.STRING,
       },
       type: {
         type: Sequelize.STRING,
@@ -53,14 +54,6 @@ module.exports = {
       },
       lat: {
         type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      address: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      country: {
-        type: Sequelize.STRING,
         allowNull: false,
       },
       locationDesc: {
@@ -83,37 +76,30 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      checkIn: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      checkOut: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       pets: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       parties: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-      },
-      comercialPhoto: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
+        defaultValue: false,
       },
       smoking: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       coAlarm: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       smokeAlarm: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       guestNumber: {
         type: Sequelize.INTEGER,
@@ -122,58 +108,66 @@ module.exports = {
       bedroomsNumber: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: false,
       },
       bathsNumber: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      isFavourite: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
       scenicViews: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       bathroom: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       laundry: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       family: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       heatingCooling: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       internet: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       office: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       kitchen: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       diningRoom: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       outdoor: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       parking: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       services: {
         type: Sequelize.STRING,
@@ -182,6 +176,16 @@ module.exports = {
       notIncluded: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      star: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      favorite: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
