@@ -35,6 +35,7 @@ module.exports = {
       "Philippines",
       "Germany"
   ];
+
     const data = [];
     for (let i = 0; i < 25; i++) {
       const randomIndex = Math.floor(Math.random() * Type.length);
@@ -44,7 +45,7 @@ module.exports = {
         address: "Street " + (i+1),
         country: Country[randomIndexCountry],
         description: "Description of listing " + i,
-        price: i * 100,
+        price: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
         cleaningFee: i * 10,
         availabilityDateFrom: Math.floor(Date.now() / 1000),
         availabilityDateTo: Math.floor(Date.now() / 1000) + 86400 * 7, // 7 days later
