@@ -1,41 +1,68 @@
 const { Properties, Images } = require("../models");
+const { getAverageRatingAndReviews } = require("../controllers/reviewController");
 
 const getProperty = async (req, res, next) => {
-    const data = await Properties.findAll({
-        include: {
-            model: Images,
-            attributes: ["url"],
+  try {
+    // Ambil semua properti dengan gambar terkait
+    const properties = await Properties.findAll({
+      include: [
+        {
+          model: Images,
+          attributes: ["url"],
         },
+      ],
     });
 
-    const transformedData = data.map(property => ({
+    // Transformasi data properti dan tambahkan data review yang diakumulasi
+    const transformedData = await Promise.all(properties.map(async (property) => {
+      const { averageRating, reviews } = await getAverageRatingAndReviews(property.id);
+
+      return {
         ...property.dataValues,
-        Images: property.Images.map(image => image.url),
+        Images: property.Images.map((image) => image.url),
+        averageRating: averageRating || null,
+        reviews: reviews || [],
+      };
     }));
 
     return res.status(200).json(transformedData);
+  } catch (error) {
+    console.error("Error fetching properties:", error);
+    return res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data properti.' });
+  }
 };
 
 const getPropertyDetail = async (req, res, next) => {
-    const data = await Properties.findOne({
-        where: {
-            id: req.params.id,
-        },
-        include: {
-            model: Images,
-            attributes: ["url"],
-        },
+  try {
+    // Ambil properti berdasarkan id
+    const property = await Properties.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: {
+        model: Images,
+        attributes: ["url"],
+      },
     });
 
-    if (data) {
-        const transformedData = {
-            ...data.dataValues,
-            Images: data.Images.map(image => image.url),
-        };
-        return res.status(200).json(transformedData);
-    } else {
-        return res.status(404).json({ message: "Property not found" });
+    if (!property) {
+      return res.status(404).json({ message: "Properti tidak ditemukan" });
     }
+
+    const { averageRating, reviews } = await getAverageRatingAndReviews(property.id);
+
+    const transformedData = {
+      ...property.dataValues,
+      Images: property.Images.map((image) => image.url),
+      averageRating: averageRating || null,
+      reviews: reviews || [],
+    };
+
+    return res.status(200).json(transformedData);
+  } catch (error) {
+    console.error("Error fetching property detail:", error);
+    return res.status(500).json({ error: 'Terjadi kesalahan saat mengambil detail properti.' });
+  }
 };
 
 const addProperty = async (req, res, next) => {

@@ -9,11 +9,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      propertyId: {
-        type: Sequelize.INTEGER
+      PropertyID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references:{
+          model:"Properties",
+          key:"id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       },
-      userId: {
-        type: Sequelize.INTEGER
+      userID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references:{
+          model:"Users",
+          key:"id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
       },
       reviewText: {
         type: Sequelize.TEXT

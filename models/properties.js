@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       Properties.belongsTo(models.Users);
       Properties.hasMany(models.Rooms);
       Properties.hasMany(models.Bookings);
+      Properties.hasMany(models.Review);
     }
   }
   Properties.init(
