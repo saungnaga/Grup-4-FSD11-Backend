@@ -1,5 +1,7 @@
 "use strict";
 
+const bcrypt = require('bcrypt');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -29,13 +31,18 @@ module.exports = {
       "Australia",
       "South Africa"
     ];
+
     const data = [];
     for (let i = 0; i < 5; i++) {
       const randomIndex = Math.floor(Math.random() * countries.length);
+
+      // Hash the password
+      const hashedPassword = await bcrypt.hash("password" + i, 10);
+
       data.push({
         name: "User" + i,
         email: "email" + i + "@example.com",
-        password: "password" + i,
+        password: hashedPassword, // Use the hashed password
         phone: i,
         photoURL: "https://www.img.com/" + i,
         address: "Street" + i,

@@ -42,25 +42,36 @@ const getUserDetail = async (req, res, next) => {
   return res.status(200).json(data);
 };
 
-const addUser = async (req, res, next) => {
-  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory, description, languanges, } = req.body;
-  const data = await Users.create({
-    name,
-    photoURL,
-    email,
-    address,
-    password,
-    governmentID,
-    phone,
-    EmergencyContact,
-    paymentinfo,
-    tripHistory,
-    description,
-    languanges,
-  });
+const bcrypt = require('bcrypt');
 
-  return res.status(200).json(data);
+const addUser = async (req, res, next) => {
+  const { name, photoURL, email, address, password, governmentID, phone, EmergencyContact, paymentinfo, tripHistory, description, languanges } = req.body;
+
+  try {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
+
+    const data = await Users.create({
+      name,
+      photoURL,
+      email,
+      address,
+      password: hashedPassword, // Use the hashed password
+      governmentID,
+      phone,
+      EmergencyContact,
+      paymentinfo,
+      tripHistory,
+      description,
+      languanges,
+    });
+
+    return res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
 };
+
 
 const updateUser = async (req, res, next) => {
   const {
