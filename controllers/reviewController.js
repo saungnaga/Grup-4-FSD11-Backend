@@ -1,13 +1,14 @@
-const { Review, Property } = require('../models');
+const { Review } = require('../models');
 
 // Fungsi untuk mengambil rata-rata rating dan semua review berdasarkan propertyId
-const getAverageRatingAndReviews = async (req, res) => {
+const getAverageRatingAndReviews = async (propertyId) => {
   try {
-    const { propertyId } = req.params;
     const reviews = await Review.findAll({ where: { propertyId } });
 
     if (!reviews.length) {
-      return res.status(404).json({ error: 'No reviews found for this property.' });
+      return {
+        averageRating: null, reviews: []
+      };
     }
 
     const totalRatings = reviews.reduce((acc, review) => {
@@ -33,16 +34,25 @@ const getAverageRatingAndReviews = async (req, res) => {
       averageRating[key] = (totalRatings[key] / reviewCount).toFixed(2);
     }
 
-    // Format respons sesuai yang diinginkan
-    const response = {
-      propertyId,
+    return {
       averageRating,
       reviews: reviews.map(review => ({
-        reviewText: review.reviewText
+        reviewText: review.reviewText,
+        // userId: review.userId,
+        // propertyId: review.propertyId,
       }))
     };
+  } catch (error) {
+    throw new Error('An error occurred while fetching reviews.');
+  }
+};
 
-    res.json(response);
+// Endpoint untuk mendapatkan rata-rata rating dan review berdasarkan propertyId
+const getAverageRatingAndReviewsHandler = async (req, res) => {
+  try {
+    const { propertyId } = req.params;
+    const result = await getAverageRatingAndReviews(propertyId);
+    res.json(result);
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while fetching reviews.' });
   }
@@ -54,7 +64,7 @@ const addReview = async (req, res) => {
     const { propertyId, userId, reviewText, cleanlinessRate, accuracyRate, checkInRate, communicationRate, locationRate, valueRate } = req.body;
 
     // Validasi input
-    if (!propertyId || !userId || !cleanlinessRate || !accuracyRate || !checkInRate || !communicationRate || !locationRate || !valueRate) {
+    if (!propertyId || !userId || !cleanlinessRate || !accuracyRate || !checkInRate || !communicationRate || !locationRate || !valueRate || !reviewText) {
       return res.status(400).json({ error: 'All fields are required.' });
     }
 
@@ -77,7 +87,62 @@ const addReview = async (req, res) => {
   }
 };
 
+const updateReview = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { reviewText, cleanlinessRate, accuracyRate, checkInRate, communicationRate, locationRate, valueRate } = req.body;
+
+    // Cari review berdasarkan ID
+    const review = await Review.findByPk(id);
+
+    if (!review) {
+      return res.status(404).json({ error: 'Review tidak ditemukan.' });
+    }
+
+    // Update review
+    review.reviewText = reviewText;
+    review.cleanlinessRate = cleanlinessRate;
+    review.accuracyRate = accuracyRate;
+    review.checkInRate = checkInRate;
+    review.communicationRate = communicationRate;
+    review.locationRate = locationRate;
+    review.valueRate = valueRate;
+
+    await review.save();
+
+    res.status(200).json(review);
+  } catch (error) {
+    console.error('Terjadi kesalahan saat memperbarui review:', error);
+    res.status(500).json({ error: 'Terjadi kesalahan saat memperbarui review.' });
+  }
+};
+
+const deleteReview = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ error: 'ID parameter is missing.' });
+    }
+
+    const review = await Review.findOne({ where: { id:req.params.id } });
+
+    if (!review) {
+      return res.status(404).json({ error: 'Review tidak ditemukan.' });
+    }
+
+    await review.destroy();
+    return res.status(200).json({ message: 'Review berhasil dihapus.' });
+  } catch (error) {
+    console.error('Terjadi kesalahan saat menghapus review:', error);
+    return res.status(500).json({ error: 'Terjadi kesalahan saat menghapus review.' });
+  }
+};
+
+
 module.exports = {
   getAverageRatingAndReviews,
-  addReview
+  getAverageRatingAndReviewsHandler,
+  addReview,
+  updateReview,
+  deleteReview,
 };
